@@ -20,7 +20,7 @@ all_year = raw_data.col_values(3)
 
 data = np.array([all_name,all_location,all_rank,all_year])
 
-name = r'伟'
+name = r'建国'
 #liansheng = np.where(data[0] == r'连生')
 liansheng = np.where(data[0] == name)
 
@@ -46,9 +46,20 @@ for i in range(len(location)):
     for j in range(len(loc_axix)):
         if location[i] == loc_axix[j]:
             city_weight[j][year[i]-time_axix[0]]=weight[i]
+
+'''消失之后重新返回前20的不计算在内'''
+for city in city_weight:
+    for i in range(len(city)):
+        if city[i] > 0:
+            first = i;
+            break
+    for i in range(first,len(city)):
+        if city[i] == 0:
+            first_disappear = i;
+            break
+    for i in range(first_disappear,len(city)):
+        city[i] = 0;
   
-print(len(loc_axix))         
-'''
 color = ['aquamarine','bisque','black','blanchedalmond','blue','blueviolet','brown','burlywood','cadetblue','chartreuse','chocolate','coral','cornflowerblue','cornsilk','crimson','cyan','darkblue','darkcyan','darkgoldenrod','darkgray','darkgreen','darkkhaki','darkmagenta','darkolivegreen','darkorange','darkorchid','darkred','darksalmon','darkseagreen','darkslateblue','darkslategray','darkturquoise','darkviolet','deeppink','deepskyblue','dimgray','dodgerblue','gainsboro','gold','gray','green','greenyellow','hotpink','indianred','khaki','lavender','lightsteelblue','magenta','mediumaquamarine','navajowhite','navy''oldlace','orange','palegoldenrod','pink','purple','red','springgreen','steelblue','tomato','turquoise','violet','whitesmoke','yellow','yellowgreen']
 #解决中文显示问题
 plt.rcParams['font.sans-serif']=['SimHei']
@@ -75,4 +86,3 @@ ax.xaxis.set_major_locator(MultipleLocator(2))
 ax.yaxis.set_major_locator(MultipleLocator(2))
 plt.ylim(0,21)#把y轴的刻度范围设置为1到20
 plt.show()
-'''
